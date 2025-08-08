@@ -5,13 +5,13 @@
 //  Created by Anton Safonov on 05/08/2025.
 //
 
-class Student
+class Student: Codable
 {
     var firstName: String = ""
     var lastName: String = ""
     var object: String = ""
     var rating: Double = 0.0
-    let noneObject = "NONE"
+    var noneObject = "NONE"
     
 //    var StudentsMass: [Student] = []
     

@@ -9,7 +9,7 @@ struct ManagerMenu
 {
     static func ClearConsole(){print("\u{001B}[2J\u{001B}[H")}
     
-    static private func showMenu()
+    static public func showMenu()
     {
         print("""
             \\\\\\\\\\\\MENU\\\\\\\\\\\\

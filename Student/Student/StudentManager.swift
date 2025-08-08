@@ -5,6 +5,8 @@
 //  Created by Anton Safonov on 06/08/2025.
 //
 
+import Foundation
+
 struct StudentManager
 {
     static var students: [Student] = []
@@ -27,7 +29,7 @@ struct StudentManager
             print("Продолжить добавление студентов? (y/n)\n")
             if readLine() == "n"
             {
-                
+                saveToJSON()
                 break
             }else { continue }
         }
@@ -36,6 +38,7 @@ struct StudentManager
         {
             print("Name: \(i.firstName) Surname: \(i.lastName)\nObject: \(i.object), Rating: \(i.rating)\n")
         }
+        ManagerMenu.OpenMenu()
         
     }
     static func addStudentWithNameAndSurnameAndSubject()
@@ -97,6 +100,29 @@ struct StudentManager
        }
        static func saveToJSON() {
            print("Сохраняем в JSON...")
-           // твой код сохранения в JSON
+           let encoder = JSONEncoder()
+           encoder.outputFormatting = .prettyPrinted
+           do
+           {
+               let data = try encoder.encode(students)
+               let fileURL = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop")
+                   .appendingPathComponent("students.json")
+               
+               try data.write(to: fileURL)
+               print("✅ Студенты сохранены в файл: \(fileURL.path)")
+               removeMassStudent()
+           }catch
+           {
+               print("❌ Ошибка при сохранении в JSON")
+           }
+           
        }
+    static func loadFromJSON() {
+        print("Загружаем из JSON...")
+    }
+    static func removeMassStudent()
+    {
+        students.removeAll()
+        print("🧹 Массив студентов очищен.")
+    }
 }
